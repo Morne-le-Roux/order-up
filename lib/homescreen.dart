@@ -21,10 +21,14 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           child: const Icon(Icons.add)),
       body: SafeArea(
-          child: GridView.count(
-        crossAxisCount: 2,
-        mainAxisSpacing: 2,
-        children: [...menu],
+          child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: GridView.count(
+          crossAxisCount: 2,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          children: [...menu],
+        ),
       )),
     );
   }
