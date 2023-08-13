@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:order_up/constants.dart';
 
 class MenuItem extends StatefulWidget {
-  const MenuItem({super.key});
+  const MenuItem({
+    super.key,
+    required this.name,
+    required this.iconData,
+  });
+  final IconData iconData;
+  final String name;
 
   @override
   State<MenuItem> createState() => _MenuItemState();
@@ -18,6 +24,9 @@ class _MenuItemState extends State<MenuItem> {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: kPrimaryColor, width: 2),
         color: kSecondaryColor,
+      ),
+      child: Column(
+        children: [Icon(widget.iconData), Text(widget.name)],
       ),
     );
   }

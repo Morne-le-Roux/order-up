@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:order_up/components/bottomsheet.dart';
+import 'package:order_up/menu.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,7 +10,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> menu = [];
+  Menu menu = Menu();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
             showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
-                  return const AddMenuItem();
+                  return AddMenuItemBottomSheet(menu: menu);
                 });
             setState(() {});
           },
@@ -31,12 +33,11 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GridView.count(
-              shrinkWrap: true,
-              crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              children: [...menu],
-            ),
+                shrinkWrap: true,
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                children: menu.menu.toList()),
           ],
         ),
       )),

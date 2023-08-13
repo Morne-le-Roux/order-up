@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:order_up/components/text_input.dart';
 import 'package:order_up/constants.dart';
+import 'package:order_up/menu.dart';
 
-class AddMenuItem extends StatefulWidget {
-  const AddMenuItem({super.key});
+class AddMenuItemBottomSheet extends StatefulWidget {
+  const AddMenuItemBottomSheet({
+    super.key,
+    required this.menu,
+  });
+
+  final Menu menu;
 
   @override
-  State<AddMenuItem> createState() => _AddMenuItemState();
+  State<AddMenuItemBottomSheet> createState() => _AddMenuItemBottomSheetState();
 }
 
-class _AddMenuItemState extends State<AddMenuItem> {
+class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
   List<IconData> iconList = [Icons.abc, Icons.access_alarms];
   List<IconBox> iconBoxList = [];
 
@@ -17,9 +23,9 @@ class _AddMenuItemState extends State<AddMenuItem> {
   void initState() {
     super.initState();
 
-    for (var iconData in iconList) {
+    for (var icon in iconList) {
       iconBoxList.add(IconBox(
-        icon: iconData,
+        icon: icon,
         selected: false,
       ));
     }
@@ -35,7 +41,20 @@ class _AddMenuItemState extends State<AddMenuItem> {
           Row(
             children: iconBoxList,
           ),
-          const AddItemButton(),
+          AddItemButton(
+            onTap: () {
+              setState(() {
+                for (var iconBox in iconBoxList) {
+                  if (iconBox.selected) {
+                    widget.menu
+                        .addItemToMenu(name: "Testing!", icon: iconBox.icon);
+                    break;
+                  }
+                  Navigator.pop(context);
+                }
+              });
+            },
+          ),
         ],
       ),
     );
@@ -79,17 +98,22 @@ class _IconBoxState extends State<IconBox> {
   }
 }
 
-class AddItemButton extends StatelessWidget {
+class AddItemButton extends StatefulWidget {
   const AddItemButton({
     super.key,
-    required iconBoxList,
+    required this.onTap,
   });
-  final List<IconBox> iconBoxList;
+  final void Function() onTap;
 
+  @override
+  State<AddItemButton> createState() => _AddItemButtonState();
+}
+
+class _AddItemButtonState extends State<AddItemButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: widget.onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         decoration: BoxDecoration(
