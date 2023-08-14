@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:order_up/components/text_input.dart';
 import 'package:order_up/constants.dart';
-import 'package:order_up/menu.dart';
 
 class AddMenuItemBottomSheet extends StatefulWidget {
   const AddMenuItemBottomSheet({
     super.key,
-    required this.menu,
   });
-
-  final Menu menu;
 
   @override
   State<AddMenuItemBottomSheet> createState() => _AddMenuItemBottomSheetState();
@@ -43,16 +39,13 @@ class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
           ),
           AddItemButton(
             onTap: () {
-              setState(() {
-                for (var iconBox in iconBoxList) {
-                  if (iconBox.selected) {
-                    widget.menu
-                        .addItemToMenu(name: "Testing!", icon: iconBox.icon);
-                    break;
-                  }
-                  Navigator.pop(context);
+              for (var iconBox in iconBoxList) {
+                if (iconBox.selected) {
+                  //TODO: ADD MENU
+                  break;
                 }
-              });
+                Navigator.pop(context);
+              }
             },
           ),
         ],

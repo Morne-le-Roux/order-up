@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:order_up/components/bottomsheet.dart';
-import 'package:order_up/menu.dart';
+import 'package:get/get.dart';
+import 'package:order_up/logic.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  Menu menu = Menu();
+  final Controller c = Get.put(Controller());
+  List<MenuItem> menu = Obx(() => c.menu);
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
             showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
-                  return AddMenuItemBottomSheet(menu: menu);
+                  return const AddMenuItemBottomSheet();
                 });
-            setState(() {});
           },
           child: const Icon(Icons.add)),
       body: SafeArea(
@@ -37,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
-                children: menu.menu.toList()),
+                children: (Obx(() => c.menu.toList()))), //TODO ADD MENU OBJECT
           ],
         ),
       )),
