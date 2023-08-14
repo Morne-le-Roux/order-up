@@ -7,7 +7,6 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final Controller c = Get.put(Controller());
-  List<MenuItem> menu = Obx(() => c.menu);
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +17,22 @@ class HomeScreen extends StatelessWidget {
             showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
-                  return const AddMenuItemBottomSheet();
+                  return AddMenuItemBottomSheet();
                 });
           },
           child: const Icon(Icons.add)),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            GridView.count(
-                shrinkWrap: true,
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                children: (Obx(() => c.menu.toList()))), //TODO ADD MENU OBJECT
-          ],
+        child: Obx(
+          () => GridView.count(
+            shrinkWrap: true,
+            crossAxisCount: 2,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            children:
+                c.menu.map<Widget>((element) => element as Widget).toList(),
+          ),
         ),
       )),
     );

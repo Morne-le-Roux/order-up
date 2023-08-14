@@ -1,31 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:order_up/components/text_input.dart';
 import 'package:order_up/constants.dart';
+import 'package:get/get.dart';
+import 'package:order_up/logic.dart';
 
-class AddMenuItemBottomSheet extends StatefulWidget {
-  const AddMenuItemBottomSheet({
+class AddMenuItemBottomSheet extends StatelessWidget {
+  AddMenuItemBottomSheet({
     super.key,
   });
 
-  @override
-  State<AddMenuItemBottomSheet> createState() => _AddMenuItemBottomSheetState();
-}
+  final Controller c = Get.find();
 
-class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
-  List<IconData> iconList = [Icons.abc, Icons.access_alarms];
-  List<IconBox> iconBoxList = [];
-
-  @override
-  void initState() {
-    super.initState();
-
-    for (var icon in iconList) {
-      iconBoxList.add(IconBox(
-        icon: icon,
-        selected: false,
-      ));
-    }
-  }
+  final List<IconBox> iconBoxList = [
+    IconBox(icon: Icons.abc, selected: false),
+    IconBox(icon: Icons.lock_clock, selected: false)
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +28,12 @@ class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
           ),
           AddItemButton(
             onTap: () {
+              Navigator.pop(context);
               for (var iconBox in iconBoxList) {
                 if (iconBox.selected) {
-                  //TODO: ADD MENU
+                  c.addItemToMenu(name: "Testing", iconData: iconBox.icon);
                   break;
                 }
-                Navigator.pop(context);
               }
             },
           ),
