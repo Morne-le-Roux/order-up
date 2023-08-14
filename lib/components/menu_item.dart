@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:order_up/constants.dart';
 
 class MenuItem extends StatefulWidget {
@@ -7,7 +8,7 @@ class MenuItem extends StatefulWidget {
     required this.name,
     required this.iconData,
   });
-  final IconData iconData;
+  final FaIcon iconData;
   final String name;
 
   @override
@@ -26,7 +27,7 @@ class _MenuItemState extends State<MenuItem> {
         color: kSecondaryColor,
       ),
       child: Column(
-        children: [Icon(widget.iconData), Text(widget.name)],
+        children: [widget.iconData, Text(widget.name)],
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:order_up/components/text_input.dart';
 import 'package:order_up/constants.dart';
 import 'package:get/get.dart';
 import 'package:order_up/logic.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AddMenuItemBottomSheet extends StatelessWidget {
   AddMenuItemBottomSheet({
@@ -12,8 +13,8 @@ class AddMenuItemBottomSheet extends StatelessWidget {
   final Controller c = Get.find();
 
   final List<IconBox> iconBoxList = [
-    IconBox(icon: Icons.abc, selected: false),
-    IconBox(icon: Icons.lock_clock, selected: false)
+    IconBox(icon: const FaIcon(FontAwesomeIcons.burger), selected: false),
+    IconBox(icon: const FaIcon(FontAwesomeIcons.hotdog), selected: false)
   ];
 
   @override
@@ -50,7 +51,7 @@ class IconBox extends StatefulWidget {
     required this.icon,
     required this.selected,
   });
-  final IconData icon;
+  final FaIcon icon;
   bool selected = false;
 
   @override
@@ -74,7 +75,7 @@ class _IconBoxState extends State<IconBox> {
             color: widget.selected ? kSecondaryColor : Colors.white,
             border: Border.all(color: kPrimaryColor),
             borderRadius: BorderRadius.circular(8)),
-        child: Icon(widget.icon),
+        child: Center(child: widget.icon),
       ),
     );
   }
