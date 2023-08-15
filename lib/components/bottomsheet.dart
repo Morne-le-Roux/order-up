@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:order_up/logic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// ignore: must_be_immutable
 class AddMenuItemBottomSheet extends StatelessWidget {
   AddMenuItemBottomSheet({
     super.key,
