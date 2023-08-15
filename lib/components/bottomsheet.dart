@@ -14,8 +14,12 @@ class AddMenuItemBottomSheet extends StatelessWidget {
   final Controller c = Get.find();
 
   final List<IconBox> iconBoxList = [
-    IconBox(icon: const FaIcon(FontAwesomeIcons.burger), selected: false),
-    IconBox(icon: const FaIcon(FontAwesomeIcons.hotdog), selected: false)
+    IconBox(
+        icon: const FaIcon(FontAwesomeIcons.burger, color: kPrimaryColor),
+        selected: false),
+    IconBox(
+        icon: const FaIcon(FontAwesomeIcons.hotdog, color: kPrimaryColor),
+        selected: false)
   ];
 
   TextEditingController itemNameController = TextEditingController();
@@ -78,7 +82,9 @@ class _IconBoxState extends State<IconBox> {
         width: 50,
         height: 50,
         decoration: BoxDecoration(
-            color: widget.selected ? kSecondaryColor : Colors.white,
+            color: widget.selected
+                ? const Color.fromARGB(255, 255, 132, 173)
+                : Colors.white,
             border: Border.all(color: kPrimaryColor),
             borderRadius: BorderRadius.circular(8)),
         child: Center(child: widget.icon),

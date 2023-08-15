@@ -7,6 +7,6 @@ class Controller extends GetxController {
 
   //Method to add items to the above list.
   addItemToMenu({required name, required iconData}) {
-    menu.add(MenuItem(name: name, iconData: iconData));
+    menu.add(MenuItem(name: name, icon: iconData));
   }
 }
