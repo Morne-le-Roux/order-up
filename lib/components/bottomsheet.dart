@@ -17,13 +17,17 @@ class AddMenuItemBottomSheet extends StatelessWidget {
     IconBox(icon: const FaIcon(FontAwesomeIcons.hotdog), selected: false)
   ];
 
+  TextEditingController itemNameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          const TextInput(),
+          TextInput(
+            itemNameController: itemNameController,
+          ),
           Row(
             children: iconBoxList,
           ),
@@ -32,7 +36,8 @@ class AddMenuItemBottomSheet extends StatelessWidget {
               Navigator.pop(context);
               for (var iconBox in iconBoxList) {
                 if (iconBox.selected) {
-                  c.addItemToMenu(name: "Testing", iconData: iconBox.icon);
+                  c.addItemToMenu(
+                      name: itemNameController.text, iconData: iconBox.icon);
                   break;
                 }
               }
