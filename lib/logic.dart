@@ -6,7 +6,11 @@ class Controller extends GetxController {
   var menu = [].obs;
 
   //Method to add items to the above list.
-  addItemToMenu({required name, required iconData}) {
-    menu.add(MenuItem(name: name, icon: iconData));
+  addItemToMenu({
+    required name,
+    required iconData,
+    required amount,
+  }) {
+    menu.add(MenuItem(name: name, icon: iconData, amount: amount));
   }
 }

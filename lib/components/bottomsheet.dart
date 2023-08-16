@@ -23,6 +23,7 @@ class AddMenuItemBottomSheet extends StatelessWidget {
   ];
 
   TextEditingController itemNameController = TextEditingController();
+  TextEditingController itemAmountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +37,38 @@ class AddMenuItemBottomSheet extends StatelessWidget {
           Row(
             children: iconBoxList,
           ),
+
+          //Amount
+          Container(
+            width: 150,
+            margin: const EdgeInsets.all(20),
+            padding: const EdgeInsets.only(left: 5),
+            decoration: BoxDecoration(
+                border: Border.all(color: kPrimaryColor),
+                color: kSecondaryColor,
+                borderRadius: BorderRadius.circular(20)),
+            child: TextField(
+              onChanged: (value) => itemAmountController.text = value,
+              keyboardType: TextInputType.number,
+              cursorColor: kPrimaryColor,
+              decoration: const InputDecoration(
+                  hintText: "Starting Amount",
+                  icon: Icon(
+                    Icons.numbers,
+                    color: kPrimaryColor,
+                  ),
+                  border: InputBorder.none),
+            ),
+          ),
           AddItemButton(
             onTap: () {
               Navigator.pop(context);
               for (var iconBox in iconBoxList) {
                 if (iconBox.selected) {
                   c.addItemToMenu(
-                      name: itemNameController.text, iconData: iconBox.icon);
+                      name: itemNameController.text,
+                      iconData: iconBox.icon,
+                      amount: int.parse(itemAmountController.text));
                   break;
                 }
               }

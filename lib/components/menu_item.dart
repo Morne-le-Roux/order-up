@@ -2,14 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:order_up/constants.dart';
 
+// ignore: must_be_immutable
 class MenuItem extends StatefulWidget {
-  const MenuItem({
+  MenuItem({
     super.key,
     required this.name,
     required this.icon,
+    required this.amount,
   });
   final FaIcon icon;
   final String name;
+  int amount;
+
+  //Negate 1
+  amountNegate() {
+    amount--;
+  }
+
+  //Add 1
+  amountAdd() {
+    amount++;
+  }
+
+  //Set Amount
+  amountSet({amountSet}) {
+    amount = amountSet;
+  }
 
   @override
   State<MenuItem> createState() => _MenuItemState();
@@ -45,14 +63,21 @@ class _MenuItemState extends State<MenuItem> {
                 ),
               ],
             )),
-        const AmountCounter(),
+        AmountCounter(
+          amount: widget.amount,
+        ),
       ],
     );
   }
 }
 
 class AmountCounter extends StatelessWidget {
-  const AmountCounter({super.key});
+  const AmountCounter({
+    super.key,
+    required this.amount,
+  });
+
+  final int amount;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +88,7 @@ class AmountCounter extends StatelessWidget {
           color: kSecondaryColor,
           border: Border.all(color: Colors.black),
           borderRadius: BorderRadius.circular(50)),
-      child: const Center(child: Text("42")),
+      child: Center(child: Text((amount.toString()))),
     );
   }
 }
