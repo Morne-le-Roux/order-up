@@ -30,6 +30,8 @@ class TextInput extends StatelessWidget {
         cursorColor: kPrimaryColor,
         decoration: const InputDecoration(
           border: InputBorder.none,
+          hintText: "Item Name",
+          hintStyle: kHintTextStyle,
           icon: Icon(
             Icons.fastfood,
             color: kPrimaryColor,

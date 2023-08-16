@@ -34,8 +34,11 @@ class AddMenuItemBottomSheet extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          TextInput(
-            itemNameController: itemNameController,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 18.0),
+            child: TextInput(
+              itemNameController: itemNameController,
+            ),
           ),
           Row(
             children: iconBoxList,
@@ -55,7 +58,8 @@ class AddMenuItemBottomSheet extends StatelessWidget {
               keyboardType: TextInputType.number,
               cursorColor: kPrimaryColor,
               decoration: const InputDecoration(
-                  hintText: "Starting Amount",
+                  hintText: "Amount",
+                  hintStyle: kHintTextStyle,
                   icon: Icon(
                     Icons.numbers,
                     color: kPrimaryColor,
@@ -70,7 +74,6 @@ class AddMenuItemBottomSheet extends StatelessWidget {
               Navigator.pop(context);
               for (var iconBox in iconBoxList) {
                 if (iconBox.selected) {
-                  print(itemAmountController.text);
                   c.addItemToMenu(
                     name: itemNameController.text,
                     iconData: iconBox.icon,
