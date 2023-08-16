@@ -38,7 +38,7 @@ class AddMenuItemBottomSheet extends StatelessWidget {
             children: iconBoxList,
           ),
 
-          //Amount
+          //Amount Text Field
           Container(
             width: 150,
             margin: const EdgeInsets.all(20),
@@ -60,15 +60,21 @@ class AddMenuItemBottomSheet extends StatelessWidget {
                   border: InputBorder.none),
             ),
           ),
+
+          //Add Item Button
           AddItemButton(
             onTap: () {
               Navigator.pop(context);
               for (var iconBox in iconBoxList) {
                 if (iconBox.selected) {
+                  print(itemAmountController.text);
                   c.addItemToMenu(
-                      name: itemNameController.text,
-                      iconData: iconBox.icon,
-                      amount: int.parse(itemAmountController.text));
+                    name: itemNameController.text,
+                    iconData: iconBox.icon,
+                    amount: itemAmountController.text == ""
+                        ? 0
+                        : int.parse(itemAmountController.text),
+                  );
                   break;
                 }
               }
