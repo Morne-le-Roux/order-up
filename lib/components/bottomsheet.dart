@@ -19,7 +19,10 @@ class AddMenuItemBottomSheet extends StatelessWidget {
         selected: false),
     IconBox(
         icon: const FaIcon(FontAwesomeIcons.hotdog, color: kPrimaryColor),
-        selected: false)
+        selected: false),
+    IconBox(
+        icon: const FaIcon(FontAwesomeIcons.egg, color: kPrimaryColor),
+        selected: false),
   ];
 
   TextEditingController itemNameController = TextEditingController();
