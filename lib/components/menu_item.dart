@@ -22,7 +22,7 @@ class _MenuItemState extends State<MenuItem> {
       alignment: Alignment.topRight,
       children: [
         Container(
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: kPrimaryColor, width: 2),
