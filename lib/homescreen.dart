@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
         child: Obx(
           () => GridView.count(
             shrinkWrap: true,
-            crossAxisCount: 3,
+            crossAxisCount: 2,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
             children:
