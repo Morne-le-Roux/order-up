@@ -13,18 +13,6 @@ class AddMenuItemBottomSheet extends StatelessWidget {
 
   final Controller c = Get.find();
 
-  final List<IconBox> iconBoxList = [
-    IconBox(
-        icon: const FaIcon(FontAwesomeIcons.burger, color: kPrimaryColor),
-        selected: false),
-    IconBox(
-        icon: const FaIcon(FontAwesomeIcons.hotdog, color: kPrimaryColor),
-        selected: false),
-    IconBox(
-        icon: const FaIcon(FontAwesomeIcons.egg, color: kPrimaryColor),
-        selected: false),
-  ];
-
   TextEditingController itemNameController = TextEditingController();
   TextEditingController itemAmountController = TextEditingController();
 
@@ -41,7 +29,7 @@ class AddMenuItemBottomSheet extends StatelessWidget {
             ),
           ),
           Row(
-            children: iconBoxList,
+            children: c.iconBoxList,
           ),
 
           //Amount Text Field
@@ -72,7 +60,7 @@ class AddMenuItemBottomSheet extends StatelessWidget {
           AddItemButton(
             onTap: () {
               Navigator.pop(context);
-              for (var iconBox in iconBoxList) {
+              for (var iconBox in c.iconBoxList) {
                 if (iconBox.selected) {
                   c.addItemToMenu(
                     name: itemNameController.text,
@@ -102,6 +90,8 @@ class IconBox extends StatefulWidget {
   final FaIcon icon;
   bool selected = false;
 
+  final Controller c = Get.find();
+
   @override
   State<IconBox> createState() => _IconBoxState();
 }
@@ -112,6 +102,12 @@ class _IconBoxState extends State<IconBox> {
     return GestureDetector(
       onTap: () {
         setState(() {
+          for (var iconBox in widget.c.iconBoxList) {
+            if (iconBox.selected) {
+              iconBox.selected = false;
+              break;
+            }
+          }
           widget.selected = !widget.selected;
         });
       },
