@@ -47,11 +47,11 @@ class _MenuItemState extends State<MenuItem> {
         children: [
           Container(
               margin: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: kPrimaryColor, width: 2),
-                color: kSecondaryColor,
-              ),
+              decoration: const BoxDecoration(
+                  // borderRadius: BorderRadius.circular(20),
+                  // border: Border.all(color: kPrimaryColor, width: 2),
+                  // color: kSecondaryColor,
+                  ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
