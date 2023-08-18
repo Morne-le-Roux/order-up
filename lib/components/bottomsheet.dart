@@ -6,15 +6,23 @@ import 'package:order_up/logic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // ignore: must_be_immutable
-class AddMenuItemBottomSheet extends StatelessWidget {
-  AddMenuItemBottomSheet({
+class AddMenuItemBottomSheet extends StatefulWidget {
+  const AddMenuItemBottomSheet({
     super.key,
   });
 
-  final Controller c = Get.find();
+  @override
+  State<AddMenuItemBottomSheet> createState() => _AddMenuItemBottomSheetState();
+}
+
+class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
+  final MenuGetController c = Get.find();
 
   TextEditingController itemNameController = TextEditingController();
+
   TextEditingController itemAmountController = TextEditingController();
+
+  int _selectedIndex = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +36,24 @@ class AddMenuItemBottomSheet extends StatelessWidget {
               itemNameController: itemNameController,
             ),
           ),
+
+          //ICON LIST
           Row(
-            children: c.iconBoxList,
+            children: List.generate(c.iconBoxList.length, (index) {
+              return IconBox(
+                icon: c.iconBoxList[index].icon,
+                selected: _selectedIndex == index,
+                onTap: () {
+                  setState(() {
+                    if (_selectedIndex == index) {
+                      _selectedIndex = -1; // Deselect if tapped again
+                    } else {
+                      _selectedIndex = index;
+                    }
+                  });
+                },
+              );
+            }),
           ),
 
           //Amount Text Field
@@ -60,18 +84,12 @@ class AddMenuItemBottomSheet extends StatelessWidget {
           AddItemButton(
             onTap: () {
               Navigator.pop(context);
-              for (var iconBox in c.iconBoxList) {
-                if (iconBox.selected) {
-                  c.addItemToMenu(
-                    name: itemNameController.text,
-                    iconData: iconBox.icon,
-                    amount: itemAmountController.text == ""
-                        ? 0
-                        : int.parse(itemAmountController.text),
-                  );
-                  break;
-                }
-              }
+              c.addItemToMenu(
+                  name: itemNameController.text,
+                  iconData: c.iconBoxList[_selectedIndex].icon,
+                  amount: itemAmountController.text == ""
+                      ? 0
+                      : int.parse(itemAmountController.text));
             },
           ),
         ],
@@ -86,11 +104,13 @@ class IconBox extends StatefulWidget {
     super.key,
     required this.icon,
     required this.selected,
+    this.onTap,
   });
   final FaIcon icon;
   bool selected = false;
+  void Function()? onTap;
 
-  final Controller c = Get.find();
+  // final MenuGetController c = Get.find();
 
   @override
   State<IconBox> createState() => _IconBoxState();
@@ -100,17 +120,7 @@ class _IconBoxState extends State<IconBox> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          for (var iconBox in widget.c.iconBoxList) {
-            if (iconBox.selected) {
-              iconBox.selected = false;
-              break;
-            }
-          }
-          widget.selected = !widget.selected;
-        });
-      },
+      onTap: widget.onTap,
       child: Container(
         margin: const EdgeInsets.all(5),
         width: 50,

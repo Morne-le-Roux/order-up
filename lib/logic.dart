@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:order_up/components/menu_item.dart';
+import 'constants.dart';
 import 'components/bottomsheet.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'constants.dart';
 
-class Controller extends GetxController {
+class MenuGetController extends GetxController {
   //Main Menu list. This displays on the main menu.
   var menu = [].obs;
 
@@ -17,17 +17,26 @@ class Controller extends GetxController {
     menu.add(MenuItem(name: name, icon: iconData, amount: amount));
   }
 
-  List<IconBox> iconBoxList = [
+  RxList<IconBox> iconBoxList = [
     IconBox(
-        icon: const FaIcon(FontAwesomeIcons.burger, color: kPrimaryColor),
+        icon: const FaIcon(
+          FontAwesomeIcons.burger,
+          color: kPrimaryColor,
+        ),
         selected: false),
     IconBox(
-        icon: const FaIcon(FontAwesomeIcons.hotdog, color: kPrimaryColor),
+        icon: const FaIcon(
+          FontAwesomeIcons.hotdog,
+          color: kPrimaryColor,
+        ),
         selected: false),
     IconBox(
-        icon: const FaIcon(FontAwesomeIcons.egg, color: kPrimaryColor),
+        icon: const FaIcon(
+          FontAwesomeIcons.egg,
+          color: kPrimaryColor,
+        ),
         selected: false),
-  ];
+  ].obs;
 
   void singleIconSelected() {
     for (var iconBox in iconBoxList) {
@@ -38,3 +47,5 @@ class Controller extends GetxController {
     }
   }
 }
+
+class IconBoxListController extends GetxController {}

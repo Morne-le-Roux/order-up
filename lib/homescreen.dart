@@ -6,7 +6,7 @@ import 'package:order_up/logic.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final Controller c = Get.put(Controller());
+  final MenuGetController c = Get.put(MenuGetController());
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
             showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
-                  return AddMenuItemBottomSheet();
+                  return const AddMenuItemBottomSheet();
                 });
           },
           child: const Icon(Icons.add)),
