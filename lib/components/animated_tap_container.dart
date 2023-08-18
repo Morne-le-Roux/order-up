@@ -39,7 +39,7 @@ class _AnimatedTapContainerState extends State<AnimatedTapContainer> {
       },
       child: AnimatedContainer(
         padding: EdgeInsets.all(_isAnimating
-            ? 20 //INCREASE THIS TO MAKE THE ANIMATION MORE... MORE.
+            ? 30 //INCREASE THIS TO MAKE THE ANIMATION MORE... MORE.
             : 0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
