@@ -90,7 +90,11 @@ class AmountCounter extends StatelessWidget {
           color: kSecondaryColor,
           border: Border.all(color: Colors.black),
           borderRadius: BorderRadius.circular(50)),
-      child: Center(child: Text((amount.toString()))),
+      child: Center(
+          child: Text(
+        (amount.toString()),
+        style: kPrimaryTextStyle.copyWith(fontSize: 14),
+      )),
     );
   }
 }
