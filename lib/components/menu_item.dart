@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:order_up/components/animated_tap_container.dart';
 import 'package:order_up/constants.dart';
 
 // ignore: must_be_immutable
@@ -10,7 +10,7 @@ class MenuItem extends StatefulWidget {
     required this.icon,
     required this.amount,
   });
-  final FaIcon icon;
+  final String icon;
   final String name;
   int amount;
 
@@ -36,7 +36,7 @@ class MenuItem extends StatefulWidget {
 class _MenuItemState extends State<MenuItem> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return AnimatedTapContainer(
       onTap: () {
         setState(() {
           widget.amountNegate();
@@ -47,18 +47,21 @@ class _MenuItemState extends State<MenuItem> {
         children: [
           Container(
               margin: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                  // borderRadius: BorderRadius.circular(20),
-                  // border: Border.all(color: kPrimaryColor, width: 2),
-                  // color: kSecondaryColor,
-                  ),
+              // decoration: BoxDecoration(
+              //   borderRadius: BorderRadius.circular(20),
+              //   border: Border.all(color: kPrimaryColor, width: 2),
+              //   color: kSecondaryColor,
+              // ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Container(
                       padding:
                           const EdgeInsets.only(left: 25, right: 25, top: 10),
-                      child: FittedBox(child: widget.icon)),
+                      child: FittedBox(
+                          child: Image(
+                        image: AssetImage(widget.icon),
+                      ))),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(

@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 import 'package:order_up/components/menu_item.dart';
-import 'constants.dart';
 import 'components/bottomsheet.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MenuGetController extends GetxController {
   //Main Menu list. This displays on the main menu.
@@ -18,24 +16,13 @@ class MenuGetController extends GetxController {
   }
 
   RxList<IconBox> iconBoxList = [
-    IconBox(
-        icon: const FaIcon(
-          FontAwesomeIcons.burger,
-          color: kPrimaryColor,
-        ),
-        selected: false),
-    IconBox(
-        icon: const FaIcon(
-          FontAwesomeIcons.hotdog,
-          color: kPrimaryColor,
-        ),
-        selected: false),
-    IconBox(
-        icon: const FaIcon(
-          FontAwesomeIcons.egg,
-          color: kPrimaryColor,
-        ),
-        selected: false),
+    IconBox(icon: "assets/icons/hotdog.png", selected: false),
+    IconBox(icon: "assets/icons/bacon.png", selected: false),
+    IconBox(icon: "assets/icons/burger.png", selected: false),
+    IconBox(icon: "assets/icons/cheese.png", selected: false),
+    IconBox(icon: "assets/icons/chicken.png", selected: false),
+    IconBox(icon: "assets/icons/croissant.png", selected: false),
+    IconBox(icon: "assets/icons/egg.png", selected: false),
   ].obs;
 
   void singleIconSelected() {

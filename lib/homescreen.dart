@@ -30,8 +30,20 @@ class HomeScreen extends StatelessWidget {
             crossAxisCount: 2,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
-            children:
-                c.menu.map<Widget>((element) => element as Widget).toList(),
+            children: List.generate(
+              c.menu.length,
+              (index) {
+                double itemHeight =
+                    200; // calculate desired height based on index or data
+                return AnimatedContainer(
+                    duration: const Duration(
+                        seconds: 1), // Adjust animation duration as needed
+                    height: itemHeight, // Set the desired height
+                    child: c.menu[index] // Your content here
+                    );
+              },
+            ),
+            // c.menu.map<Widget>((element) => element as Widget).toList(),
           ),
         ),
       )),

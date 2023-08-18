@@ -3,7 +3,6 @@ import 'package:order_up/components/text_input.dart';
 import 'package:order_up/constants.dart';
 import 'package:get/get.dart';
 import 'package:order_up/logic.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // ignore: must_be_immutable
 class AddMenuItemBottomSheet extends StatefulWidget {
@@ -106,7 +105,7 @@ class IconBox extends StatefulWidget {
     required this.selected,
     this.onTap,
   });
-  final FaIcon icon;
+  final String icon;
   bool selected = false;
   void Function()? onTap;
 
@@ -131,7 +130,10 @@ class _IconBoxState extends State<IconBox> {
                 : Colors.white,
             border: Border.all(color: kPrimaryColor),
             borderRadius: BorderRadius.circular(8)),
-        child: Center(child: widget.icon),
+        child: Center(
+            child: Image(
+          image: AssetImage(widget.icon),
+        )),
       ),
     );
   }
