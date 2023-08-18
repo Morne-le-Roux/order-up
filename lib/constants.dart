@@ -10,3 +10,8 @@ const kHintTextStyle = TextStyle(
   color: Color.fromARGB(138, 246, 172, 197),
   fontSize: 16,
 );
+
+const kPrimaryTextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 20,
+);

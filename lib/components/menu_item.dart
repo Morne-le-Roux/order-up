@@ -41,17 +41,12 @@ class _MenuItemState extends State<MenuItem> {
       children: [
         Container(
             margin: const EdgeInsets.all(8),
-            // decoration: BoxDecoration(
-            //   borderRadius: BorderRadius.circular(20),
-            //   border: Border.all(color: kPrimaryColor, width: 2),
-            //   color: kSecondaryColor,
-            // ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
               children: [
                 Container(
-                    padding:
-                        const EdgeInsets.only(left: 25, right: 25, top: 10),
+                    padding: const EdgeInsets.only(
+                        left: 25, right: 25, top: 10, bottom: 20),
                     child: AnimatedTapContainer(
                       onTap: () {
                         setState(() {
@@ -63,13 +58,10 @@ class _MenuItemState extends State<MenuItem> {
                         image: AssetImage(widget.icon),
                       )),
                     )),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    widget.name,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(color: kPrimaryColor),
-                  ),
+                Text(
+                  widget.name,
+                  textAlign: TextAlign.center,
+                  style: kPrimaryTextStyle,
                 ),
               ],
             )),
