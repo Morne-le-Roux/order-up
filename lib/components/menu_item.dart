@@ -13,6 +13,7 @@ class MenuItem extends StatefulWidget {
   final String icon;
   final String name;
   int amount;
+  Color borderColor = Colors.transparent;
 
   //Negate 1
   amountNegate() {
@@ -29,18 +30,42 @@ class MenuItem extends StatefulWidget {
     amount = amountSet;
   }
 
+  changeBorderColor() {
+    if (amount < 20) {
+      if (amount < 10) {
+        borderColor = Colors.red;
+      } else {
+        borderColor = Colors.yellow;
+      }
+    } else {
+      borderColor = Colors.transparent;
+    }
+  }
+
   @override
   State<MenuItem> createState() => _MenuItemState();
 }
 
 class _MenuItemState extends State<MenuItem> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Alignment.topRight,
+      alignment: Alignment.bottomRight,
       children: [
         Container(
             margin: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                border: Border.all(
+                  color: widget.borderColor,
+                  width: 5,
+                ),
+                borderRadius: BorderRadius.circular(20)),
             child: Stack(
               alignment: Alignment.bottomCenter,
               children: [
@@ -51,6 +76,7 @@ class _MenuItemState extends State<MenuItem> {
                       onTap: () {
                         setState(() {
                           widget.amountNegate();
+                          widget.changeBorderColor();
                         });
                       },
                       child: FittedBox(
@@ -84,11 +110,14 @@ class AmountCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.all(20),
       height: 40,
       width: 40,
       decoration: BoxDecoration(
           color: kSecondaryColor,
-          border: Border.all(color: Colors.black),
+          border: Border.all(
+            color: amount > 10 ? Colors.green : Colors.red,
+          ),
           borderRadius: BorderRadius.circular(50)),
       child: Center(
           child: Text(
