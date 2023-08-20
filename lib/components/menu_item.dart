@@ -48,11 +48,6 @@ class MenuItem extends StatefulWidget {
 
 class _MenuItemState extends State<MenuItem> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.bottomRight,
@@ -80,8 +75,17 @@ class _MenuItemState extends State<MenuItem> {
                         });
                       },
                       child: FittedBox(
-                          child: Image(
-                        image: AssetImage(widget.icon),
+                          child: Stack(
+                        children: [
+                          Image(
+                            image: AssetImage(widget.icon),
+                          ),
+                          Visibility(
+                              visible: widget.amount == 0 ? true : false,
+                              child: const Image(
+                                  image:
+                                      AssetImage("assets/icons/finished.png"))),
+                        ],
                       )),
                     )),
                 Text(
