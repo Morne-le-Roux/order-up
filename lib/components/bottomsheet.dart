@@ -38,6 +38,7 @@ class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
 
           //ICON LIST
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(c.iconBoxList.length, (index) {
               return IconBox(
                 icon: c.iconBoxList[index].icon,
