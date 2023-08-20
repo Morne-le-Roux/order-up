@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:order_up/components/animated_tap_container.dart';
 import 'package:order_up/constants.dart';
+import 'package:get/get.dart';
+import 'package:order_up/logic.dart';
 
 // ignore: must_be_immutable
 class MenuItem extends StatefulWidget {
@@ -14,6 +16,8 @@ class MenuItem extends StatefulWidget {
   final String name;
   int amount;
   Color borderColor = Colors.transparent;
+
+  final MenuGetController c = Get.find();
 
   //Negate 1
   amountNegate() {
@@ -48,6 +52,12 @@ class MenuItem extends StatefulWidget {
 
 class _MenuItemState extends State<MenuItem> {
   @override
+  void initState() {
+    super.initState();
+    widget.c.getItemData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.bottomRight,
@@ -72,6 +82,10 @@ class _MenuItemState extends State<MenuItem> {
                         setState(() {
                           widget.amountNegate();
                           widget.changeBorderColor();
+                          widget.c.saveItemData(
+                              name: widget.name,
+                              icon: widget.icon,
+                              amount: widget.amount);
                         });
                       },
                       child: FittedBox(

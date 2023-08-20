@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:order_up/components/menu_item.dart';
 import 'components/bottomsheet.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MenuGetController extends GetxController {
   //Main Menu list. This displays on the main menu.
@@ -31,6 +32,33 @@ class MenuGetController extends GetxController {
         iconBox.selected = false;
         break;
       }
+    }
+  }
+
+//Shared Preferences
+
+  saveItemData({
+    required name,
+    required icon,
+    required amount,
+  }) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> menuItemSettings = [icon, amount.toString()];
+    prefs.setStringList(name, menuItemSettings);
+  }
+
+  getItemData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var items = prefs.getKeys();
+    print(items);
+
+    for (var item in items) {
+      List<String> menuItem = prefs.getStringList(item) ?? [];
+      print(menuItem);
+      addItemToMenu(
+          name: item,
+          iconData: menuItem.elementAt(0),
+          amount: int.parse(menuItem.elementAt(1)));
     }
   }
 }

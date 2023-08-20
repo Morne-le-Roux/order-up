@@ -3,9 +3,14 @@ import 'package:order_up/components/bottomsheet.dart';
 import 'package:get/get.dart';
 import 'package:order_up/logic.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final MenuGetController c = Get.put(MenuGetController());
 
   @override
