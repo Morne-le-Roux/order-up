@@ -81,7 +81,7 @@ class _MenuItemState extends State<MenuItem> {
                             image: AssetImage(widget.icon),
                           ),
                           Visibility(
-                              visible: widget.amount == 0 ? true : false,
+                              visible: widget.amount < 1 ? true : false,
                               child: const Image(
                                   image:
                                       AssetImage("assets/icons/finished.png"))),
