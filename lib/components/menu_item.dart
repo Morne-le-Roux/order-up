@@ -92,6 +92,7 @@ class _MenuItemState extends State<MenuItem> {
                   widget.name,
                   textAlign: TextAlign.center,
                   style: kPrimaryTextStyle,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             )),
