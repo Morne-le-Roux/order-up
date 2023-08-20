@@ -15,3 +15,9 @@ class MainApp extends StatelessWidget {
         theme: ThemeData(primaryColor: Colors.pink), home: HomeScreen());
   }
 }
+
+
+
+//TODO: Add some sounds as confirmation.
+//TODO: Set text overfill.
+//TODO: Iconboxes spilling over. Please fix.
