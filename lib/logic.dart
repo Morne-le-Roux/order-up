@@ -62,5 +62,3 @@ class MenuGetController extends GetxController {
     }
   }
 }
-
-class IconBoxListController extends GetxController {}
