@@ -52,12 +52,6 @@ class MenuItem extends StatefulWidget {
 
 class _MenuItemState extends State<MenuItem> {
   @override
-  void initState() {
-    super.initState();
-    widget.c.getItemData();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.bottomRight,

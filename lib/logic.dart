@@ -50,15 +50,14 @@ class MenuGetController extends GetxController {
   getItemData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var items = prefs.getKeys();
-    print(items);
+    Map<String, List> savedItems = {};
 
     for (var item in items) {
       List<String> menuItem = prefs.getStringList(item) ?? [];
-      print(menuItem);
-      addItemToMenu(
-          name: item,
-          iconData: menuItem.elementAt(0),
-          amount: int.parse(menuItem.elementAt(1)));
+      savedItems[item] = [menuItem.elementAt(0), menuItem.elementAt(1)];
     }
+
+    print("SavedItems $savedItems");
+    return savedItems;
   }
 }

@@ -12,12 +12,12 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        theme: ThemeData(primaryColor: Colors.pink), home: HomeScreen());
+        theme: ThemeData(primaryColor: Colors.pink), home: const HomeScreen());
   }
 }
 
 
 
 //TODO: Add some sounds as confirmation.
-//TODO: Set text overfill.
+
 //TODO: Iconboxes spilling over. Please fix.
