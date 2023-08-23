@@ -54,7 +54,7 @@ class _MenuItemState extends State<MenuItem> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Alignment.bottomRight,
+      alignment: Alignment.center,
       children: [
         Container(
             margin: const EdgeInsets.all(8),
@@ -104,8 +104,12 @@ class _MenuItemState extends State<MenuItem> {
                 ),
               ],
             )),
-        AmountCounter(
-          amount: widget.amount,
+        Positioned(
+          right: 10,
+          bottom: 20,
+          child: AmountCounter(
+            amount: widget.amount,
+          ),
         ),
       ],
     );

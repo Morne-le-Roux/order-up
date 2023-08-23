@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:order_up/components/bottomsheet.dart';
 import 'package:get/get.dart';
 import 'package:order_up/logic.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,21 +15,20 @@ class _HomeScreenState extends State<HomeScreen> {
   final MenuGetController c = Get.put(MenuGetController());
   Future? getData;
 
-  // onStartData(item) async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   List<String> menuItem = prefs.getStringList(item) ?? [];
-  //   print(menuItem.elementAt(0));
-  //   print(menuItem.elementAt(1));
-  //   c.addItemToMenu(
-  //       name: item,
-  //       iconData: menuItem.elementAt(0).toString(),
-  //       amount: int.parse(menuItem.elementAt(1)));
-  // }
-
   @override
   void initState() {
     super.initState();
     getData = c.getItemData();
+  }
+
+  removeItemData({required name, required int index}) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      print("Before remove: ${[...c.menu]}");
+      c.menu.removeAt(index);
+      print("After remove: ${[...c.menu]}");
+      prefs.remove(name);
+    });
   }
 
   @override
@@ -63,29 +63,21 @@ class _HomeScreenState extends State<HomeScreen> {
             body: SafeArea(
               child: Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Obx(
-                    () => GridView.count(
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
-                      children: List.generate(
-                        c.menu.length,
-                        (index) {
-                          double itemHeight =
-                              200; // calculate desired height based on index or data
-                          return AnimatedContainer(
-                              duration: const Duration(
-                                  seconds:
-                                      1), // Adjust animation duration as needed
-                              height: itemHeight, // Set the desired height
-                              child: c.menu[index] // Your content here
-                              );
+                  child: Obx(() => GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, // Number of columns
+                        ),
+                        itemCount: [...c.menu].length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final menuItem = [...c.menu][index];
+                          return GestureDetector(
+                            onLongPress: () => removeItemData(
+                                name: menuItem.name, index: index),
+                            child: menuItem,
+                          );
                         },
-                      ),
-                      // c.menu.map<Widget>((element) => element as Widget).toList(),
-                    ),
-                  )),
+                      ))),
             ),
           );
         } else {

@@ -38,18 +38,15 @@ class _AnimatedTapContainerState extends State<AnimatedTapContainer> {
         widget.onTap();
       },
       child: AnimatedContainer(
-        padding: EdgeInsets.all(_isAnimating
-            ? 30 //INCREASE THIS TO MAKE THE ANIMATION MORE... MORE.
-            : 0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           // color: _isAnimating
           //     ? const Color.fromARGB(36, 207, 41, 97)
           //     : Colors.transparent,
         ),
-        // width: _isAnimating ? 200.0 : 100.0,
-        // height: _isAnimating ? 200.0 : 100.0,
-        duration: const Duration(milliseconds: 50),
+        width: _isAnimating ? 200 : 250.0,
+        height: _isAnimating ? 200.0 : 250.0,
+        duration: const Duration(milliseconds: 40),
         curve: Curves.easeInOut,
         child: widget.child,
       ),
