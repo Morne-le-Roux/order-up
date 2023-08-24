@@ -129,8 +129,8 @@ class _IconBoxState extends State<IconBox> {
       onTap: widget.onTap,
       child: Container(
         margin: const EdgeInsets.all(5),
-        width: 50,
-        height: 50,
+        width: 40,
+        height: 40,
         decoration: BoxDecoration(
             color: widget.selected
                 ? const Color.fromARGB(255, 255, 132, 173)

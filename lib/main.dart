@@ -22,4 +22,3 @@ class MainApp extends StatelessWidget {
 
 //TODO: Add some sounds as confirmation.
 
-//TODO: Iconboxes spilling over. Please fix.
