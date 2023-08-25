@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:order_up/components/bottomsheet.dart';
 import 'package:get/get.dart';
+import 'package:order_up/components/long_press_dialog.dart';
 import 'package:order_up/logic.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,16 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     getData = c.getItemData();
-  }
-
-  removeItemData({required name, required int index}) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      print("Before remove: ${[...c.menu]}");
-      c.menu.removeAt(index);
-      print("After remove: ${[...c.menu]}");
-      prefs.remove(name);
-    });
   }
 
   @override
@@ -72,8 +62,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (BuildContext context, int index) {
                           final menuItem = [...c.menu][index];
                           return GestureDetector(
-                            onLongPress: () => removeItemData(
-                                name: menuItem.name, index: index),
+                            onLongPress: () => showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return LongPressDialog(
+                                    name: menuItem.name,
+                                    index: index,
+                                    amount: menuItem.amount,
+                                  );
+                                }),
                             child: menuItem,
                           );
                         },

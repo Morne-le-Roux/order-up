@@ -28,6 +28,7 @@ class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 18.0),
@@ -163,12 +164,14 @@ class _AddItemButtonState extends State<AddItemButton> {
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
         decoration: BoxDecoration(
             color: kPrimaryColor, borderRadius: BorderRadius.circular(50)),
-        child: const Text(
-          "Add Item",
-          style: TextStyle(color: Colors.white),
+        child: const Center(
+          child: Text(
+            "Add Item",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );
