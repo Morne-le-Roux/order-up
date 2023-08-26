@@ -3,17 +3,18 @@ import 'package:order_up/constants.dart';
 import 'package:order_up/logic.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'menu_item.dart';
 
 class LongPressDialog extends StatefulWidget {
   const LongPressDialog({
     super.key,
-    required this.name,
     required this.index,
-    required this.amount,
+    required this.menuItem,
   });
-  final String name;
+
   final int index;
-  final int amount;
+
+  final MenuItem menuItem;
 
   @override
   State<LongPressDialog> createState() => _LongPressDialogState();
@@ -22,13 +23,11 @@ class LongPressDialog extends StatefulWidget {
 class _LongPressDialogState extends State<LongPressDialog> {
   final MenuGetController c = Get.find();
 
-  removeItemData({required name, required int index}) async {
+  removeItemData({required int index}) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      print("Before remove: ${[...c.menu]}");
       c.menu.removeAt(index);
-      print("After remove: ${[...c.menu]}");
-      prefs.remove(name);
+      prefs.remove(widget.menuItem.name);
     });
   }
 
@@ -85,7 +84,7 @@ class _LongPressDialogState extends State<LongPressDialog> {
                 Row(
                   children: [
                     DeleteItemButton(onTap: () {
-                      removeItemData(name: widget.name, index: widget.index);
+                      removeItemData(index: widget.index);
                       Navigator.pop(context);
                     }),
                     const SizedBox(

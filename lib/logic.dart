@@ -13,7 +13,12 @@ class MenuGetController extends GetxController {
     required iconData,
     required amount,
   }) {
-    menu.add(MenuItem(name: name, icon: iconData, amount: amount));
+    menu.add(MenuItem(
+      name: name,
+      icon: iconData,
+      amount: amount,
+      onTap: () {},
+    ));
   }
 
   RxList<IconBox> iconBoxList = [
