@@ -49,7 +49,7 @@ class _MenuItemState extends State<MenuItem> {
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.all(8),
-        padding: const EdgeInsets.only(bottom: 35),
+        padding: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
             border: Border.all(
               color: widget.borderColor,
@@ -88,8 +88,8 @@ class _MenuItemState extends State<MenuItem> {
               ),
             ),
             Positioned(
-              top: 10,
-              left: 10,
+              top: -20,
+              left: -20,
               child: Obx(
                 () => AmountCounter(
                   amount: widget.c.menu[widget.index].amount,
@@ -100,7 +100,7 @@ class _MenuItemState extends State<MenuItem> {
               widget.name,
               textAlign: TextAlign.center,
               style: kPrimaryTextStyle,
-              overflow: TextOverflow.ellipsis,
+              overflow: TextOverflow.visible,
             ),
           ],
         ));
