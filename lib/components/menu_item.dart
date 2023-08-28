@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:order_up/components/animated_tap_container.dart';
 import 'package:order_up/constants.dart';
 import 'package:get/get.dart';
 import 'package:order_up/logic.dart';
@@ -45,61 +44,84 @@ class MenuItem extends StatefulWidget {
 }
 
 class _MenuItemState extends State<MenuItem> {
+  bool _isAnimating = false;
+
+  void _toggleAnimation() async {
+    setState(() {
+      _isAnimating = true;
+    });
+
+    if (_isAnimating) {
+      await Future.delayed(const Duration(milliseconds: 50));
+      setState(() {
+        _isAnimating = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.all(8),
-        padding: const EdgeInsets.only(bottom: 10),
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: widget.borderColor,
-              width: 5,
-            ),
-            borderRadius: BorderRadius.circular(20)),
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            AnimatedTapContainer(
-              onTap: () {
-                setState(() {
-                  widget.amount--;
-                  widget.changeBorderColor();
-                  widget.c.saveItemData(
-                      name: widget.name,
-                      icon: widget.icon,
-                      amount: widget.amount);
-                });
-              },
-              child: FittedBox(
-                child: Stack(
-                  children: [
-                    Image(
-                      image: AssetImage(widget.icon),
-                    ),
-                    Visibility(
-                        visible: widget.amount < 1 ? true : false,
-                        child: const Image(
-                            image: AssetImage("assets/icons/finished.png"))),
-                  ],
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _toggleAnimation();
+          widget.amount--;
+          widget.changeBorderColor();
+          widget.c.saveItemData(
+              name: widget.name, icon: widget.icon, amount: widget.amount);
+        });
+      },
+      child: AnimatedContainer(
+          duration: const Duration(milliseconds: 50),
+          margin: const EdgeInsets.all(8),
+          padding: const EdgeInsets.only(bottom: 10),
+          decoration: BoxDecoration(
+              border: Border.all(
+                color: widget.borderColor,
+                width: 5,
+              ),
+              borderRadius: BorderRadius.circular(20)),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 100),
+                width: _isAnimating ? 100 : 200.0,
+                height: _isAnimating ? 100 : 200.0,
+                child: FittedBox(
+                  child: Stack(
+                    children: [
+                      Image(
+                        image: AssetImage(widget.icon),
+                      ),
+                      Visibility(
+                          visible: widget.amount < 1 ? true : false,
+                          child: const Image(
+                              image: AssetImage("assets/icons/finished.png"))),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Positioned(
-              top: -20,
-              left: -20,
-              child: Obx(
-                () => AmountCounter(
-                  amount: widget.c.menu[widget.index].amount,
+              Positioned(
+                top: -20,
+                left: -20,
+                child: Obx(
+                  () => AmountCounter(
+                    amount: widget.c.menu[widget.index].amount,
+                  ),
                 ),
               ),
-            ),
-            Text(
-              widget.name,
-              textAlign: TextAlign.center,
-              style: kPrimaryTextStyle,
-              overflow: TextOverflow.visible,
-            ),
-          ],
-        ));
+              Positioned(
+                bottom: 10,
+                child: Text(
+                  widget.name,
+                  textAlign: TextAlign.center,
+                  style: kPrimaryTextStyle,
+                  overflow: TextOverflow.visible,
+                ),
+              ),
+            ],
+          )),
+    );
   }
 }

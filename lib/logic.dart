@@ -25,7 +25,7 @@ class MenuGetController extends GetxController {
     );
   }
 
-  RxList<IconBox> iconBoxList = [
+  List<IconBox> iconBoxList = [
     IconBox(icon: "assets/icons/hotdog.png", selected: false),
     IconBox(icon: "assets/icons/bacon.png", selected: false),
     IconBox(icon: "assets/icons/burger.png", selected: false),
