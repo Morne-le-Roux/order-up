@@ -27,7 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
       future: getData,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          print("snapshot data => ${snapshot.data}");
           Map data = snapshot.data;
           data.forEach(
             (key, value) {
@@ -71,8 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 c.menu[index].amount--;
                               });
                             },
-                            onLongPress: () {
-                              showDialog(
+                            onLongPress: () async {
+                              await showDialog(
                                 context: context,
                                 builder: (context) {
                                   return LongPressDialog(
@@ -80,9 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     menuItem: menuItem,
                                   );
                                 },
-                              ).then((_) {
-                                controller.update();
-                              });
+                              );
+                              c.update();
                             },
                             child: menuItem,
                           );

@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class MenuGetController extends GetxController {
   //Main Menu list. This displays on the main menu.
-  var menu = [].obs;
+  RxList menu = [].obs;
 
   //Method to add items to the above list.
   addItemToMenu({
@@ -14,13 +14,15 @@ class MenuGetController extends GetxController {
     required amount,
     required index,
   }) {
-    menu.add(MenuItem(
-      name: name,
-      icon: iconData,
-      amount: amount,
-      onTap: () {},
-      index: index,
-    ));
+    menu.add(
+      MenuItem(
+        name: name,
+        icon: iconData,
+        amount: amount,
+        onTap: () {},
+        index: index,
+      ),
+    );
   }
 
   RxList<IconBox> iconBoxList = [

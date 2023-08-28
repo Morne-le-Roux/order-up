@@ -71,10 +71,6 @@ class _LongPressDialogState extends State<LongPressDialog> {
                   onTap: () {
                     setState(() {
                       c.menu[widget.index].amount--;
-                      c.saveItemData(
-                          name: c.menu[widget.index].name,
-                          icon: c.menu[widget.index].icon,
-                          amount: c.menu[widget.index].amount);
                     });
                   },
                 ),
@@ -91,9 +87,11 @@ class _LongPressDialogState extends State<LongPressDialog> {
                       width: 20,
                     ),
                     SaveItemButton(onTap: () {
-                      setState(() {
-                        Navigator.pop(context);
-                      });
+                      Navigator.pop(context);
+                      c.saveItemData(
+                          name: c.menu[widget.index].name,
+                          icon: c.menu[widget.index].icon,
+                          amount: c.menu[widget.index].amount);
                     })
                   ],
                 ),
