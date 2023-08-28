@@ -39,58 +39,53 @@ class _HomeScreenState extends State<HomeScreen> {
                   amount: int.parse(itemDetails.elementAt(1)));
             },
           );
-          return GetBuilder<MenuGetController>(
-            builder: (controller) {
-              return Scaffold(
-                floatingActionButton: FloatingActionButton.small(
-                    backgroundColor: Colors.pink,
-                    onPressed: () {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return const AddMenuItemBottomSheet();
+          return Scaffold(
+            floatingActionButton: FloatingActionButton.small(
+                backgroundColor: Colors.pink,
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const AddMenuItemBottomSheet();
+                      });
+                },
+                child: const Icon(Icons.add)),
+            body: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Obx(
+                  () => GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, // Number of columns
+                    ),
+                    itemCount: [...c.menu].length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final menuItem = [...c.menu][index];
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            c.menu[index].amount--;
                           });
-                    },
-                    child: const Icon(Icons.add)),
-                body: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Obx(
-                      () => GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, // Number of columns
-                        ),
-                        itemCount: [...c.menu].length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final menuItem = [...c.menu][index];
-                          return GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                c.menu[index].amount--;
-                              });
-                            },
-                            onLongPress: () async {
-                              await showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return LongPressDialog(
-                                    index: index,
-                                    menuItem: menuItem,
-                                  );
-                                },
+                        },
+                        onLongPress: () async {
+                          await showDialog(
+                            context: context,
+                            builder: (context) {
+                              return LongPressDialog(
+                                index: index,
+                                menuItem: menuItem,
                               );
-                              c.update();
                             },
-                            child: menuItem,
                           );
                         },
-                      ),
-                    ),
+                        child: menuItem,
+                      );
+                    },
                   ),
                 ),
-              );
-            },
+              ),
+            ),
           );
         } else {
           return const CircularProgressIndicator();
