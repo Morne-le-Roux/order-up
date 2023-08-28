@@ -5,11 +5,9 @@ class AmountCounter extends StatelessWidget {
   const AmountCounter({
     super.key,
     required this.amount,
-    required this.index,
   });
 
   final int amount;
-  final int index;
 
   @override
   Widget build(BuildContext context) {

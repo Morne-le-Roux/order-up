@@ -12,12 +12,14 @@ class MenuGetController extends GetxController {
     required name,
     required iconData,
     required amount,
+    required index,
   }) {
     menu.add(MenuItem(
       name: name,
       icon: iconData,
       amount: amount,
       onTap: () {},
+      index: index,
     ));
   }
 
@@ -62,7 +64,6 @@ class MenuGetController extends GetxController {
       savedItems[item] = [menuItem.elementAt(0), menuItem.elementAt(1)];
     }
 
-    print("SavedItems $savedItems");
     return savedItems;
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:order_up/components/bottomsheet.dart';
 import 'package:get/get.dart';
-import 'package:order_up/components/counter.dart';
 import 'package:order_up/components/long_press_dialog.dart';
 import 'package:order_up/logic.dart';
 
@@ -35,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
               String itemName = key;
               List itemDetails = value;
               c.addItemToMenu(
+                  index: c.menu.toList().length,
                   name: itemName,
                   iconData: itemDetails.elementAt(0),
                   amount: int.parse(itemDetails.elementAt(1)));
@@ -55,48 +55,41 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: const Icon(Icons.add)),
                 body: SafeArea(
                   child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Obx(() => GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2, // Number of columns
-                            ),
-                            itemCount: [...c.menu].length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final menuItem = [...c.menu][index];
-                              return GestureDetector(
-                                onTap: () {
-                                  c.menu[index].amount--;
-                                },
-                                onLongPress: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return LongPressDialog(
-                                        index: index,
-                                        menuItem: menuItem,
-                                      );
-                                    },
-                                  ).then((_) {
-                                    controller.update();
-                                  });
-                                },
-                                child: Stack(
-                                  children: [
-                                    menuItem,
-                                    Positioned(
-                                      child: Obx(
-                                        () => AmountCounter(
-                                          amount: c.menu[index].amount,
-                                          index: index,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
+                    padding: const EdgeInsets.all(10.0),
+                    child: Obx(
+                      () => GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, // Number of columns
+                        ),
+                        itemCount: [...c.menu].length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final menuItem = [...c.menu][index];
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                c.menu[index].amount--;
+                              });
                             },
-                          ))),
+                            onLongPress: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return LongPressDialog(
+                                    index: index,
+                                    menuItem: menuItem,
+                                  );
+                                },
+                              ).then((_) {
+                                controller.update();
+                              });
+                            },
+                            child: menuItem,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
                 ),
               );
             },

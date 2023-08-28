@@ -3,6 +3,7 @@ import 'package:order_up/components/animated_tap_container.dart';
 import 'package:order_up/constants.dart';
 import 'package:get/get.dart';
 import 'package:order_up/logic.dart';
+import 'counter.dart';
 
 // ignore: must_be_immutable
 class MenuItem extends StatefulWidget {
@@ -12,9 +13,11 @@ class MenuItem extends StatefulWidget {
     required this.icon,
     required this.amount,
     required this.onTap,
+    required this.index,
   });
   final String icon;
   final String name;
+  final int index;
 
   final void Function() onTap;
 
@@ -46,7 +49,7 @@ class _MenuItemState extends State<MenuItem> {
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.all(8),
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(bottom: 35),
         decoration: BoxDecoration(
             border: Border.all(
               color: widget.borderColor,
@@ -57,21 +60,20 @@ class _MenuItemState extends State<MenuItem> {
           alignment: Alignment.bottomCenter,
           children: [
             Container(
-                padding: const EdgeInsets.only(
-                    left: 25, right: 25, top: 10, bottom: 20),
-                child: AnimatedTapContainer(
-                  onTap: () {
-                    setState(() {
-                      widget.amount--;
-                      widget.changeBorderColor();
-                      widget.c.saveItemData(
-                          name: widget.name,
-                          icon: widget.icon,
-                          amount: widget.amount);
-                    });
-                  },
-                  child: FittedBox(
-                      child: Stack(
+              padding: const EdgeInsets.only(left: 25, right: 25, bottom: 20),
+              child: AnimatedTapContainer(
+                onTap: () {
+                  setState(() {
+                    widget.amount--;
+                    widget.changeBorderColor();
+                    widget.c.saveItemData(
+                        name: widget.name,
+                        icon: widget.icon,
+                        amount: widget.amount);
+                  });
+                },
+                child: FittedBox(
+                  child: Stack(
                     children: [
                       Image(
                         image: AssetImage(widget.icon),
@@ -81,8 +83,19 @@ class _MenuItemState extends State<MenuItem> {
                           child: const Image(
                               image: AssetImage("assets/icons/finished.png"))),
                     ],
-                  )),
-                )),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 10,
+              left: 10,
+              child: Obx(
+                () => AmountCounter(
+                  amount: widget.c.menu[widget.index].amount,
+                ),
+              ),
+            ),
             Text(
               widget.name,
               textAlign: TextAlign.center,

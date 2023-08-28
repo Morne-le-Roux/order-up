@@ -85,11 +85,13 @@ class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
           AddItemButton(
             onTap: () {
               c.addItemToMenu(
+                  index: c.menu.toList().length,
                   name: itemNameController.text,
                   iconData: c.iconBoxList[_selectedIndex].icon,
                   amount: itemAmountController.text == ""
                       ? 0
                       : int.parse(itemAmountController.text));
+
               c.saveItemData(
                   name: itemNameController.text,
                   icon: c.iconBoxList[_selectedIndex].icon,

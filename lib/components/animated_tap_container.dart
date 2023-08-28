@@ -40,9 +40,6 @@ class _AnimatedTapContainerState extends State<AnimatedTapContainer> {
       child: AnimatedContainer(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          // color: _isAnimating
-          //     ? const Color.fromARGB(36, 207, 41, 97)
-          //     : Colors.transparent,
         ),
         width: _isAnimating ? 200 : 250.0,
         height: _isAnimating ? 200.0 : 250.0,
