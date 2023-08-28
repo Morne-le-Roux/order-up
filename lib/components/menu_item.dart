@@ -59,31 +59,28 @@ class _MenuItemState extends State<MenuItem> {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            Container(
-              padding: const EdgeInsets.only(left: 25, right: 25, bottom: 20),
-              child: AnimatedTapContainer(
-                onTap: () {
-                  setState(() {
-                    widget.amount--;
-                    widget.changeBorderColor();
-                    widget.c.saveItemData(
-                        name: widget.name,
-                        icon: widget.icon,
-                        amount: widget.amount);
-                  });
-                },
-                child: FittedBox(
-                  child: Stack(
-                    children: [
-                      Image(
-                        image: AssetImage(widget.icon),
-                      ),
-                      Visibility(
-                          visible: widget.amount < 1 ? true : false,
-                          child: const Image(
-                              image: AssetImage("assets/icons/finished.png"))),
-                    ],
-                  ),
+            AnimatedTapContainer(
+              onTap: () {
+                setState(() {
+                  widget.amount--;
+                  widget.changeBorderColor();
+                  widget.c.saveItemData(
+                      name: widget.name,
+                      icon: widget.icon,
+                      amount: widget.amount);
+                });
+              },
+              child: FittedBox(
+                child: Stack(
+                  children: [
+                    Image(
+                      image: AssetImage(widget.icon),
+                    ),
+                    Visibility(
+                        visible: widget.amount < 1 ? true : false,
+                        child: const Image(
+                            image: AssetImage("assets/icons/finished.png"))),
+                  ],
                 ),
               ),
             ),

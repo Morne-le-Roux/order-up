@@ -38,6 +38,7 @@ class _AnimatedTapContainerState extends State<AnimatedTapContainer> {
         widget.onTap();
       },
       child: AnimatedContainer(
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
         ),
