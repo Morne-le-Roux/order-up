@@ -3,18 +3,19 @@ import 'package:order_up/constants.dart';
 import 'package:order_up/logic.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'menu_item.dart';
 
+// ignore: must_be_immutable
 class LongPressDialog extends StatefulWidget {
-  const LongPressDialog({
+  LongPressDialog({
     super.key,
     required this.index,
-    required this.menuItem,
+    required this.menuItemName,
+    required this.amount,
   });
 
   final int index;
-
-  final MenuItem menuItem;
+  int amount;
+  final String menuItemName;
 
   @override
   State<LongPressDialog> createState() => _LongPressDialogState();
@@ -27,7 +28,7 @@ class _LongPressDialogState extends State<LongPressDialog> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       c.menu.removeAt(index);
-      prefs.remove(widget.menuItem.name);
+      prefs.remove(widget.menuItemName);
     });
   }
 
@@ -52,16 +53,12 @@ class _LongPressDialogState extends State<LongPressDialog> {
                   index: widget.index,
                   onTap: () {
                     setState(() {
-                      c.menu[widget.index].amount++;
-                      c.saveItemData(
-                          name: c.menu[widget.index].name,
-                          icon: c.menu[widget.index].icon,
-                          amount: c.menu[widget.index].amount);
+                      widget.amount++;
+                      print(widget.amount);
                     });
                   },
                 ),
                 Obx(() {
-                  print("Built!");
                   return Text(c.menu[widget.index].amount.toString(),
                       style: kPrimaryTextStyle.copyWith(fontSize: 60));
                 }),
@@ -70,7 +67,8 @@ class _LongPressDialogState extends State<LongPressDialog> {
                   index: widget.index,
                   onTap: () {
                     setState(() {
-                      c.menu[widget.index].amount--;
+                      widget.amount--;
+                      print(widget.amount);
                     });
                   },
                 ),
@@ -92,6 +90,7 @@ class _LongPressDialogState extends State<LongPressDialog> {
                           name: c.menu[widget.index].name,
                           icon: c.menu[widget.index].icon,
                           amount: c.menu[widget.index].amount);
+                      c.menu[widget.index].amount = widget.amount;
                     })
                   ],
                 ),
@@ -179,14 +178,14 @@ class _SaveItemButtonState extends State<SaveItemButton> {
 }
 
 class AmountModifierButton extends StatelessWidget {
-  const AmountModifierButton(
-      {super.key,
-      required this.icon,
-      required this.index,
-      required this.onTap});
+  const AmountModifierButton({
+    super.key,
+    required this.icon,
+    required this.index,
+    required this.onTap,
+  });
 
   final IconData icon;
-
   final int index;
   final void Function() onTap;
 

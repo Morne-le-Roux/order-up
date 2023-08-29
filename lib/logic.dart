@@ -12,15 +12,13 @@ class MenuGetController extends GetxController {
     required name,
     required iconData,
     required amount,
-    required index,
   }) {
     menu.add(
       MenuItem(
         name: name,
         icon: iconData,
         amount: amount,
-        onTap: () {},
-        index: index,
+        index: menu.length,
       ),
     );
   }
