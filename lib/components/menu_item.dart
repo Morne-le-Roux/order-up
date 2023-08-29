@@ -3,6 +3,7 @@ import 'package:order_up/constants.dart';
 import 'package:get/get.dart';
 import 'package:order_up/logic.dart';
 import 'counter.dart';
+import 'long_press_dialog.dart';
 
 // ignore: must_be_immutable
 class MenuItem extends StatefulWidget {
@@ -11,14 +12,11 @@ class MenuItem extends StatefulWidget {
     required this.name,
     required this.icon,
     required this.amount,
-    required this.onTap,
     required this.index,
   });
   final String icon;
   final String name;
   final int index;
-
-  final void Function() onTap;
 
   int amount;
   Color borderColor = Colors.transparent;
@@ -71,23 +69,38 @@ class _MenuItemState extends State<MenuItem> {
               name: widget.name, icon: widget.icon, amount: widget.amount);
         });
       },
+      onLongPress: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return LongPressDialog(
+              amount: widget.amount,
+              index: widget.index,
+              menuItemName: widget.name,
+            );
+          },
+        );
+        widget.c.update();
+      },
       child: AnimatedContainer(
           duration: const Duration(milliseconds: 50),
           margin: const EdgeInsets.all(8),
           padding: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(
-              border: Border.all(
-                color: widget.borderColor,
-                width: 5,
-              ),
-              borderRadius: BorderRadius.circular(20)),
+            border: Border.all(
+              color: widget.borderColor,
+              width: 5,
+            ),
+            borderRadius: BorderRadius.circular(20),
+          ),
           child: Stack(
             alignment: Alignment.center,
             children: [
               AnimatedContainer(
+                margin: const EdgeInsets.only(bottom: 20),
                 duration: const Duration(milliseconds: 100),
-                width: _isAnimating ? 100 : 200.0,
-                height: _isAnimating ? 100 : 200.0,
+                width: _isAnimating ? 0 : 150.0,
+                height: _isAnimating ? 0 : 150.0,
                 child: FittedBox(
                   child: Stack(
                     children: [
@@ -106,13 +119,12 @@ class _MenuItemState extends State<MenuItem> {
                 top: -20,
                 left: -20,
                 child: Obx(
-                  () => AmountCounter(
-                    amount: widget.c.menu[widget.index].amount,
-                  ),
+                  () =>
+                      AmountCounter(amount: widget.c.menu[widget.index].amount),
                 ),
               ),
               Positioned(
-                bottom: 10,
+                bottom: 1,
                 child: Text(
                   widget.name,
                   textAlign: TextAlign.center,

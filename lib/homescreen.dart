@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:order_up/components/bottomsheet.dart';
 import 'package:get/get.dart';
-import 'package:order_up/components/long_press_dialog.dart';
 import 'package:order_up/logic.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -33,7 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
               String itemName = key;
               List itemDetails = value;
               c.addItemToMenu(
-                  index: c.menu.toList().length,
                   name: itemName,
                   iconData: itemDetails.elementAt(0),
                   amount: int.parse(itemDetails.elementAt(1)));
@@ -62,25 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: [...c.menu].length,
                     itemBuilder: (BuildContext context, int index) {
                       final menuItem = [...c.menu][index];
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            c.menu[index].amount--;
-                          });
-                        },
-                        onLongPress: () async {
-                          await showDialog(
-                            context: context,
-                            builder: (context) {
-                              return LongPressDialog(
-                                index: index,
-                                menuItem: menuItem,
-                              );
-                            },
-                          );
-                        },
-                        child: menuItem,
-                      );
+                      return menuItem;
                     },
                   ),
                 ),
