@@ -38,29 +38,31 @@ class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
           ),
 
           //ICON LIST
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(c.iconBoxList.length, (index) {
-              return IconBox(
-                icon: c.iconBoxList[index].icon,
-                selected: _selectedIndex == index,
-                onTap: () {
-                  setState(() {
-                    if (_selectedIndex == index) {
-                      _selectedIndex = -1; // Deselect if tapped again
-                    } else {
-                      _selectedIndex = index;
-                    }
-                  });
-                },
-              );
-            }),
+          FittedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(c.iconBoxList.length, (index) {
+                return IconBox(
+                  icon: c.iconBoxList[index].icon,
+                  selected: _selectedIndex == index,
+                  onTap: () {
+                    setState(() {
+                      if (_selectedIndex == index) {
+                        _selectedIndex = -1; // Deselect if tapped again
+                      } else {
+                        _selectedIndex = index;
+                      }
+                    });
+                  },
+                );
+              }),
+            ),
           ),
 
           //Amount Text Field
           Container(
-            width: 150,
-            margin: const EdgeInsets.all(20),
+            // width: 150,
+            margin: const EdgeInsets.only(top: 18, bottom: 18),
             padding: const EdgeInsets.only(left: 5),
             decoration: BoxDecoration(
                 border: Border.all(color: kPrimaryColor),
@@ -85,7 +87,6 @@ class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
           AddItemButton(
             onTap: () {
               c.addItemToMenu(
-                  index: c.menu.toList().length,
                   name: itemNameController.text,
                   iconData: c.iconBoxList[_selectedIndex].icon,
                   amount: itemAmountController.text == ""
@@ -131,15 +132,16 @@ class _IconBoxState extends State<IconBox> {
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
-        margin: const EdgeInsets.all(5),
-        width: 40,
-        height: 40,
+        margin: const EdgeInsets.all(100),
+        // width: 40,
+        // height: 40,
         decoration: BoxDecoration(
-            color: widget.selected
-                ? const Color.fromARGB(255, 255, 132, 173)
-                : Colors.white,
-            border: Border.all(color: kPrimaryColor),
-            borderRadius: BorderRadius.circular(8)),
+          color: widget.selected
+              ? const Color.fromARGB(255, 238, 82, 134)
+              : Colors.white,
+          // border: Border.all(color: kPrimaryColor),
+          borderRadius: BorderRadius.circular(200),
+        ),
         child: Center(
             child: Image(
           image: AssetImage(widget.icon),
