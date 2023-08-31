@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
           );
           return Scaffold(
             floatingActionButton: FloatingActionButton.small(
-                backgroundColor: Colors.pink,
+                backgroundColor: Colors.white,
                 onPressed: () {
                   showModalBottomSheet(
                       context: context,
@@ -47,7 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         return const AddMenuItemBottomSheet();
                       });
                 },
-                child: const Icon(Icons.add)),
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.black,
+                )),
             body: SafeArea(
               child: Padding(
                   padding: const EdgeInsets.all(10.0),

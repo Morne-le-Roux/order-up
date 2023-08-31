@@ -4,10 +4,10 @@ const kBackgroundColor = Colors.pinkAccent;
 
 const kSecondaryColor = Color.fromARGB(71, 252, 243, 246);
 
-const kPrimaryColor = Colors.pink;
+const kPrimaryColor = Color.fromARGB(255, 0, 0, 0);
 
 const kHintTextStyle = TextStyle(
-  color: Color.fromARGB(211, 246, 172, 197),
+  color: Color.fromARGB(210, 170, 170, 170),
   fontSize: 16,
 );
 

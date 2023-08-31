@@ -28,7 +28,6 @@ class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 18.0),
@@ -42,18 +41,21 @@ class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(c.iconBoxList.length, (index) {
-                return IconBox(
-                  icon: c.iconBoxList[index].icon,
-                  selected: _selectedIndex == index,
-                  onTap: () {
-                    setState(() {
-                      if (_selectedIndex == index) {
-                        _selectedIndex = -1; // Deselect if tapped again
-                      } else {
-                        _selectedIndex = index;
-                      }
-                    });
-                  },
+                return Container(
+                  margin: const EdgeInsets.all(100),
+                  child: IconBox(
+                    icon: c.iconBoxList[index].icon,
+                    selected: _selectedIndex == index,
+                    onTap: () {
+                      setState(() {
+                        if (_selectedIndex == index) {
+                          _selectedIndex = -1; // Deselect if tapped again
+                        } else {
+                          _selectedIndex = index;
+                        }
+                      });
+                    },
+                  ),
                 );
               }),
             ),
@@ -61,25 +63,26 @@ class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
 
           //Amount Text Field
           Container(
-            // width: 150,
             margin: const EdgeInsets.only(top: 18, bottom: 18),
-            padding: const EdgeInsets.only(left: 5),
-            decoration: BoxDecoration(
-                border: Border.all(color: kPrimaryColor),
-                color: kSecondaryColor,
-                borderRadius: BorderRadius.circular(20)),
-            child: TextField(
-              onChanged: (value) => itemAmountController.text = value,
-              keyboardType: TextInputType.number,
-              cursorColor: kPrimaryColor,
-              decoration: const InputDecoration(
-                  hintText: "Amount",
-                  hintStyle: kHintTextStyle,
-                  icon: Icon(
-                    Icons.numbers,
-                    color: kPrimaryColor,
-                  ),
-                  border: InputBorder.none),
+            child: Material(
+              elevation: 2,
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                padding: const EdgeInsets.only(left: 10),
+                child: TextField(
+                  onChanged: (value) => itemAmountController.text = value,
+                  keyboardType: TextInputType.number,
+                  cursorColor: kPrimaryColor,
+                  decoration: const InputDecoration(
+                      hintText: "Amount",
+                      hintStyle: kHintTextStyle,
+                      icon: Icon(
+                        Icons.numbers,
+                        color: kPrimaryColor,
+                      ),
+                      border: InputBorder.none),
+                ),
+              ),
             ),
           ),
 
@@ -131,21 +134,23 @@ class _IconBoxState extends State<IconBox> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.onTap,
-      child: Container(
-        margin: const EdgeInsets.all(100),
-        // width: 40,
-        // height: 40,
-        decoration: BoxDecoration(
-          color: widget.selected
-              ? const Color.fromARGB(255, 238, 82, 134)
-              : Colors.white,
-          // border: Border.all(color: kPrimaryColor),
-          borderRadius: BorderRadius.circular(200),
+      child: Material(
+        elevation: 2,
+        borderRadius: BorderRadius.circular(10000),
+        child: Container(
+          margin: const EdgeInsets.all(100),
+          decoration: BoxDecoration(
+            color: widget.selected
+                ? const Color.fromARGB(255, 238, 82, 134)
+                : Colors.white,
+            // border: Border.all(color: kPrimaryColor),
+            borderRadius: BorderRadius.circular(10000),
+          ),
+          child: Center(
+              child: Image(
+            image: AssetImage(widget.icon),
+          )),
         ),
-        child: Center(
-            child: Image(
-          image: AssetImage(widget.icon),
-        )),
       ),
     );
   }
@@ -167,14 +172,22 @@ class _AddItemButtonState extends State<AddItemButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-        decoration: BoxDecoration(
-            color: kPrimaryColor, borderRadius: BorderRadius.circular(50)),
-        child: const Center(
-          child: Text(
-            "Add Item",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      child: Material(
+        elevation: 2,
+        borderRadius: BorderRadius.circular(50),
+        child: Container(
+          width: 200,
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: const Center(
+            child: Text(
+              "Add Item",
+              style:
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
       ),
