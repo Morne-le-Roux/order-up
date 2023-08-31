@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:order_up/constants.dart';
+import 'package:order_up/logic.dart';
+import 'package:get/get.dart';
 
-class AmountCounter extends StatelessWidget {
+// ignore: must_be_immutable
+class AmountCounter extends StatefulWidget {
   const AmountCounter({
     super.key,
-    required this.amount,
+    required this.index,
   });
 
-  final int amount;
+  final int index;
+
+  @override
+  State<AmountCounter> createState() => _AmountCounterState();
+}
+
+class _AmountCounterState extends State<AmountCounter> {
+  MenuGetController c = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +28,10 @@ class AmountCounter extends StatelessWidget {
       decoration: BoxDecoration(
           color: kSecondaryColor, borderRadius: BorderRadius.circular(50)),
       child: Center(
-          child: Text(
-        (amount.toString()),
-        style: kPrimaryTextStyle.copyWith(fontSize: 14),
-      )),
+          child: Obx(() => Text(
+                c.menu[widget.index].amount.toString(),
+                style: kPrimaryTextStyle.copyWith(fontSize: 14),
+              ))),
     );
   }
 }

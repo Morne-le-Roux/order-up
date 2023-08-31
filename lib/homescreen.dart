@@ -51,18 +51,15 @@ class _HomeScreenState extends State<HomeScreen> {
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Obx(
-                  () => GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // Number of columns
-                    ),
-                    itemCount: [...c.menu].length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final menuItem = [...c.menu][index];
-                      return menuItem;
-                    },
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, // Number of columns
                   ),
+                  itemCount: [...c.menu].length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final menuItem = Obx(() => [...c.menu][index]);
+                    return menuItem;
+                  },
                 ),
               ),
             ),

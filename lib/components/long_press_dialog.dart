@@ -53,8 +53,7 @@ class _LongPressDialogState extends State<LongPressDialog> {
                   index: widget.index,
                   onTap: () {
                     setState(() {
-                      widget.amount++;
-                      print(widget.amount);
+                      c.menu[widget.index].amount++;
                     });
                   },
                 ),
@@ -67,8 +66,7 @@ class _LongPressDialogState extends State<LongPressDialog> {
                   index: widget.index,
                   onTap: () {
                     setState(() {
-                      widget.amount--;
-                      print(widget.amount);
+                      c.menu[widget.index].amount--;
                     });
                   },
                 ),
@@ -86,11 +84,11 @@ class _LongPressDialogState extends State<LongPressDialog> {
                     ),
                     SaveItemButton(onTap: () {
                       Navigator.pop(context);
+                      print(c.menu[widget.index].amount);
                       c.saveItemData(
                           name: c.menu[widget.index].name,
                           icon: c.menu[widget.index].icon,
                           amount: c.menu[widget.index].amount);
-                      c.menu[widget.index].amount = widget.amount;
                     })
                   ],
                 ),

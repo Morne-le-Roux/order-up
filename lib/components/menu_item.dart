@@ -118,9 +118,8 @@ class _MenuItemState extends State<MenuItem> {
               Positioned(
                 top: -20,
                 left: -20,
-                child: Obx(
-                  () =>
-                      AmountCounter(amount: widget.c.menu[widget.index].amount),
+                child: AmountCounter(
+                  index: widget.index,
                 ),
               ),
               Positioned(
