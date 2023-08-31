@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:order_up/constants.dart';
 import 'package:get/get.dart';
 import 'package:order_up/logic.dart';
-import 'counter.dart';
 import 'long_press_dialog.dart';
 
 // ignore: must_be_immutable
@@ -73,14 +72,15 @@ class _MenuItemState extends State<MenuItem> {
         showDialog(
           context: context,
           builder: (context) {
-            return LongPressDialog(
-              amount: widget.amount,
-              index: widget.index,
-              menuItemName: widget.name,
-            );
+            return StatefulBuilder(builder: (context, setState) {
+              return LongPressDialog(
+                amount: widget.amount,
+                index: widget.index,
+                menuItemName: widget.name,
+              );
+            });
           },
-        );
-        widget.c.update();
+        ).then((_) => setState(() {}));
       },
       child: AnimatedContainer(
           duration: const Duration(milliseconds: 50),
@@ -118,8 +118,19 @@ class _MenuItemState extends State<MenuItem> {
               Positioned(
                 top: -20,
                 left: -20,
-                child: AmountCounter(
-                  index: widget.index,
+                child: Container(
+                  margin: const EdgeInsets.all(20),
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                      color: kSecondaryColor,
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Center(
+                    child: Text(
+                      widget.amount.toString(),
+                      style: kPrimaryTextStyle.copyWith(fontSize: 14),
+                    ),
+                  ),
                 ),
               ),
               Positioned(

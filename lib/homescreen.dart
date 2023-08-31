@@ -50,18 +50,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Icon(Icons.add)),
             body: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // Number of columns
-                  ),
-                  itemCount: [...c.menu].length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final menuItem = Obx(() => [...c.menu][index]);
-                    return menuItem;
-                  },
-                ),
-              ),
+                  padding: const EdgeInsets.all(10.0),
+                  child: Obx(
+                    () => GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // Number of columns
+                      ),
+                      itemCount: [...c.menu].length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final menuItem = Obx(() => [...c.menu][index]);
+                        return menuItem;
+                      },
+                    ),
+                  )),
             ),
           );
         } else {
