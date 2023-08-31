@@ -121,14 +121,19 @@ class _DeleteItemButtonState extends State<DeleteItemButton> {
           widget.onTap();
         });
       },
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-        decoration: BoxDecoration(
-            color: kPrimaryColor, borderRadius: BorderRadius.circular(50)),
-        child: const Center(
-          child: Text(
-            "Delete Item",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      child: Material(
+        elevation: 2,
+        borderRadius: BorderRadius.circular(50),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(50)),
+          child: const Center(
+            child: Text(
+              "Delete Item",
+              style:
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
       ),
@@ -158,15 +163,21 @@ class _SaveItemButtonState extends State<SaveItemButton> {
             widget.onTap();
           });
         },
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-          decoration: BoxDecoration(
-              color: kPrimaryColor, borderRadius: BorderRadius.circular(50)),
-          child: const Center(
-            child: Text(
-              "Save",
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        child: Material(
+          elevation: 2,
+          borderRadius: BorderRadius.circular(50),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(50),
+            ),
+            child: const Center(
+              child: Text(
+                "Save",
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
         ),
@@ -193,15 +204,20 @@ class AmountModifierButton extends StatelessWidget {
       onTap: () {
         onTap();
       },
-      child: Container(
-        padding: const EdgeInsets.all(5),
-        decoration: BoxDecoration(
-          color: kPrimaryColor,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Icon(
-          icon,
-          color: Colors.white,
+      child: Material(
+        elevation: 2,
+        borderRadius: BorderRadius.circular(50),
+        child: Container(
+          padding: const EdgeInsets.all(5),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Icon(
+            icon,
+            color: Colors.black,
+            size: 30,
+          ),
         ),
       ),
     );
