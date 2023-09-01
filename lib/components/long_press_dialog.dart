@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:order_up/constants.dart';
 import 'package:order_up/logic.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
 class LongPressDialog extends StatefulWidget {
@@ -24,13 +23,16 @@ class LongPressDialog extends StatefulWidget {
 class _LongPressDialogState extends State<LongPressDialog> {
   final MenuGetController c = Get.find();
 
-  removeItemData({required int index}) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      c.menu.removeAt(index);
-      prefs.remove(widget.menuItemName);
-    });
-  }
+  // removeItemData() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   setState(
+  //     () {
+  //       c.menu.removeAt(widget.index);
+  //       prefs.remove(widget.menuItemName);
+  //       c.menu.refresh();
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(context) {
@@ -50,7 +52,6 @@ class _LongPressDialogState extends State<LongPressDialog> {
               children: [
                 AmountModifierButton(
                   icon: Icons.arrow_upward,
-                  index: widget.index,
                   onTap: () {
                     setState(() {
                       c.menu[widget.index].amount++;
@@ -63,7 +64,6 @@ class _LongPressDialogState extends State<LongPressDialog> {
                 }),
                 AmountModifierButton(
                   icon: Icons.arrow_downward,
-                  index: widget.index,
                   onTap: () {
                     setState(() {
                       c.menu[widget.index].amount--;
@@ -73,17 +73,19 @@ class _LongPressDialogState extends State<LongPressDialog> {
                 const SizedBox(
                   height: 20,
                 ),
+                Text("Current Index: ${widget.index}"),
                 Row(
                   children: [
                     DeleteItemButton(onTap: () {
-                      removeItemData(index: widget.index);
+                      c.removeItemFromMenu(
+                          index: widget.index, name: widget.menuItemName);
+
                       Navigator.pop(context);
                     }),
                     const SizedBox(
                       width: 20,
                     ),
                     SaveItemButton(onTap: () {
-                      print(c.menu[widget.index].amount);
                       c.saveItemData(
                           name: c.menu[widget.index].name,
                           icon: c.menu[widget.index].icon,
@@ -190,12 +192,11 @@ class AmountModifierButton extends StatelessWidget {
   const AmountModifierButton({
     super.key,
     required this.icon,
-    required this.index,
     required this.onTap,
   });
 
   final IconData icon;
-  final int index;
+
   final void Function() onTap;
 
   @override

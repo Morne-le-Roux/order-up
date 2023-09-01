@@ -21,6 +21,15 @@ class MenuGetController extends GetxController {
         index: menu.length,
       ),
     );
+    menu.refresh();
+  }
+
+  removeItemFromMenu({required index, required name}) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    menu.removeAt(index);
+    prefs.remove(name);
+    menu.refresh();
   }
 
   List<IconBox> iconBoxList = [
