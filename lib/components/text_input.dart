@@ -34,7 +34,7 @@ class TextInput extends StatelessWidget {
             hintStyle: kHintTextStyle,
             icon: Icon(
               Icons.fastfood,
-              color: kPrimaryColor,
+              color: Color.fromARGB(210, 170, 170, 170),
             ),
           ),
         ),

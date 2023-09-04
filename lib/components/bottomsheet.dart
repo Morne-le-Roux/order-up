@@ -78,7 +78,7 @@ class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
                       hintStyle: kHintTextStyle,
                       icon: Icon(
                         Icons.numbers,
-                        color: kPrimaryColor,
+                        color: Color.fromARGB(210, 170, 170, 170),
                       ),
                       border: InputBorder.none),
                 ),
