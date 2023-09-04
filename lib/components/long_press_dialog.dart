@@ -23,17 +23,6 @@ class LongPressDialog extends StatefulWidget {
 class _LongPressDialogState extends State<LongPressDialog> {
   final MenuGetController c = Get.find();
 
-  // removeItemData() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   setState(
-  //     () {
-  //       c.menu.removeAt(widget.index);
-  //       prefs.remove(widget.menuItemName);
-  //       c.menu.refresh();
-  //     },
-  //   );
-  // }
-
   @override
   Widget build(context) {
     return StatefulBuilder(
@@ -73,7 +62,6 @@ class _LongPressDialogState extends State<LongPressDialog> {
                 const SizedBox(
                   height: 20,
                 ),
-                Text("Current Index: ${widget.index}"),
                 Row(
                   children: [
                     DeleteItemButton(onTap: () {
