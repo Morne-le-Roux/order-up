@@ -30,6 +30,7 @@ class MenuGetController extends GetxController {
     menu.removeAt(index);
     prefs.remove(name);
     menu.refresh();
+    getItemData();
   }
 
   List<IconBox> iconBoxList = [
@@ -65,6 +66,7 @@ class MenuGetController extends GetxController {
 
   getItemData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    menu.clear();
     var items = prefs.getKeys();
     Map<String, List> savedItems = {};
 
@@ -73,6 +75,16 @@ class MenuGetController extends GetxController {
       savedItems[item] = [menuItem.elementAt(0), menuItem.elementAt(1)];
     }
 
-    return savedItems;
+    Map data = savedItems;
+    data.forEach(
+      (key, value) {
+        String itemName = key;
+        List itemDetails = value;
+        addItemToMenu(
+            name: itemName,
+            iconData: itemDetails.elementAt(0),
+            amount: int.parse(itemDetails.elementAt(1)));
+      },
+    );
   }
 }

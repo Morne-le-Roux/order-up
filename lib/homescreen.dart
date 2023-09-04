@@ -17,62 +17,44 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    getData = c.getItemData();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: getData,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          Map data = snapshot.data;
-          data.forEach(
-            (key, value) {
-              String itemName = key;
-              List itemDetails = value;
-              c.addItemToMenu(
-                  name: itemName,
-                  iconData: itemDetails.elementAt(0),
-                  amount: int.parse(itemDetails.elementAt(1)));
-            },
-          );
-          return Scaffold(
-            floatingActionButton: FloatingActionButton.small(
-                backgroundColor: Colors.white,
-                onPressed: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const AddMenuItemBottomSheet();
-                      });
-                },
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.black,
-                )),
-            body: SafeArea(
-              child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Obx(
-                    () => GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // Number of columns
-                      ),
-                      itemCount: [...c.menu].length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final menuItem = Obx(() => [...c.menu][index]);
-                        return menuItem;
-                      },
-                    ),
-                  )),
-            ),
-          );
-        } else {
-          return const CircularProgressIndicator();
-        }
-      },
+    c.getItemData();
+    print("Butts!");
+    return Scaffold(
+      floatingActionButton: FloatingActionButton.small(
+          backgroundColor: Colors.white,
+          onPressed: () {
+            showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return const AddMenuItemBottomSheet();
+                });
+          },
+          child: const Icon(
+            Icons.add,
+            color: Colors.black,
+          )),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Obx(() {
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // Number of columns
+              ),
+              itemCount: [...c.menu].length,
+              itemBuilder: (BuildContext context, int index) {
+                final menuItem = Obx(() => [...c.menu][index]);
+
+                return menuItem;
+              },
+            );
+          }),
+        ),
+      ),
     );
   }
 }
