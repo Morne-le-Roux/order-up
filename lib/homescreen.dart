@@ -22,12 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     c.getItemData();
-    print("Butts!");
     return Scaffold(
       floatingActionButton: FloatingActionButton.small(
           backgroundColor: Colors.white,
           onPressed: () {
             showModalBottomSheet(
+                isScrollControlled: true,
                 context: context,
                 builder: (BuildContext context) {
                   return const AddMenuItemBottomSheet();

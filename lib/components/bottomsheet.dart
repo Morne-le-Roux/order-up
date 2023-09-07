@@ -25,87 +25,91 @@ class _AddMenuItemBottomSheetState extends State<AddMenuItemBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 18.0),
-            child: TextInput(
-              itemNameController: itemNameController,
+    return Padding(
+      padding: MediaQuery.of(context).viewInsets,
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 18.0),
+              child: TextInput(
+                itemNameController: itemNameController,
+              ),
             ),
-          ),
 
-          //ICON LIST
-          FittedBox(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(c.iconBoxList.length, (index) {
-                return Container(
-                  margin: const EdgeInsets.all(100),
-                  child: IconBox(
-                    icon: c.iconBoxList[index].icon,
-                    selected: _selectedIndex == index,
-                    onTap: () {
-                      setState(() {
-                        if (_selectedIndex == index) {
-                          _selectedIndex = -1; // Deselect if tapped again
-                        } else {
-                          _selectedIndex = index;
-                        }
-                      });
-                    },
+            //ICON LIST
+            FittedBox(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(c.iconBoxList.length, (index) {
+                  return Container(
+                    margin: const EdgeInsets.all(100),
+                    child: IconBox(
+                      icon: c.iconBoxList[index].icon,
+                      selected: _selectedIndex == index,
+                      onTap: () {
+                        setState(() {
+                          if (_selectedIndex == index) {
+                            _selectedIndex = -1; // Deselect if tapped again
+                          } else {
+                            _selectedIndex = index;
+                          }
+                        });
+                      },
+                    ),
+                  );
+                }),
+              ),
+            ),
+
+            //Amount Text Field
+            Container(
+              margin: const EdgeInsets.only(top: 18, bottom: 18),
+              child: Material(
+                elevation: 2,
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: TextField(
+                    onChanged: (value) => itemAmountController.text = value,
+                    keyboardType: TextInputType.number,
+                    cursorColor: kPrimaryColor,
+                    decoration: const InputDecoration(
+                        hintText: "Amount",
+                        hintStyle: kHintTextStyle,
+                        icon: Icon(
+                          Icons.numbers,
+                          color: Color.fromARGB(210, 170, 170, 170),
+                        ),
+                        border: InputBorder.none),
                   ),
-                );
-              }),
-            ),
-          ),
-
-          //Amount Text Field
-          Container(
-            margin: const EdgeInsets.only(top: 18, bottom: 18),
-            child: Material(
-              elevation: 2,
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                padding: const EdgeInsets.only(left: 10),
-                child: TextField(
-                  onChanged: (value) => itemAmountController.text = value,
-                  keyboardType: TextInputType.number,
-                  cursorColor: kPrimaryColor,
-                  decoration: const InputDecoration(
-                      hintText: "Amount",
-                      hintStyle: kHintTextStyle,
-                      icon: Icon(
-                        Icons.numbers,
-                        color: Color.fromARGB(210, 170, 170, 170),
-                      ),
-                      border: InputBorder.none),
                 ),
               ),
             ),
-          ),
 
-          //Add Item Button
-          AddItemButton(
-            onTap: () {
-              c.addItemToMenu(
-                  name: itemNameController.text,
-                  iconData: c.iconBoxList[_selectedIndex].icon,
-                  amount: itemAmountController.text == ""
-                      ? 0
-                      : int.parse(itemAmountController.text));
+            //Add Item Button
+            AddItemButton(
+              onTap: () {
+                c.addItemToMenu(
+                    name: itemNameController.text,
+                    iconData: c.iconBoxList[_selectedIndex].icon,
+                    amount: itemAmountController.text == ""
+                        ? 0
+                        : int.parse(itemAmountController.text));
 
-              c.saveItemData(
-                  name: itemNameController.text,
-                  icon: c.iconBoxList[_selectedIndex].icon,
-                  amount: itemAmountController.text == ""
-                      ? 0
-                      : itemAmountController.text);
-              Navigator.pop(context);
-            },
-          ),
-        ],
+                c.saveItemData(
+                    name: itemNameController.text,
+                    icon: c.iconBoxList[_selectedIndex].icon,
+                    amount: itemAmountController.text == ""
+                        ? 0
+                        : itemAmountController.text);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
